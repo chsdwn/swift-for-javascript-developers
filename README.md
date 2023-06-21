@@ -282,3 +282,139 @@ let albums: [String] = ["Century Child", "Human. :II: Nature."]
 let olympics: [Int: String] = [2012: "London", 2016: "Rio", 2021: "Tokyo"]
 let books: Set<String> = Set(["The Name of the Wind", "The Wise Man's Fear"])
 ```
+
+## Conditions
+
+### `if`/`else`
+
+```js
+const age = 18
+const isAdmin = true
+if (age >= 18 && isAdmin) {
+  console.log("You're authenticated")
+} else if (age < 18) {
+  console.log("You're not an adult")
+} else if (!isAdmin) {
+  console.log("Contact with an admin")
+} else {
+  console.log("You're unauthenticated")
+}
+```
+```swift
+let age = 18
+let isAdmin = true
+if age >= 18 && isAdmin {
+  print("You're authenticated")
+} else if age < 18 {
+  print("You're not an adult")
+} else if !isAdmin {
+  print("Contact with an admin")
+} else {
+  print("You're unauthenticated")
+}
+```
+
+### `switch`/`case`
+
+```js
+const num = 2
+switch (num) {
+  case 1:
+    console.log("one")
+    break
+  case 2:
+    console.log("two") // "two"
+  case 3:
+    console.log("three") // "three"
+  default:
+    console.log("4,5,6,...") // "4,5,6,..."
+}
+```
+```swift
+let num = 2
+switch num {
+case 1:
+  print("one")
+case 2:
+  print("two") // "two"
+  fallthrough
+case 3:
+  print("three") // "three"
+  fallthrough
+default:
+  print("4,5,6,...") // "4,5,6,..."
+}
+```
+
+### Ternary Conditional Operator: `?:`
+
+```js
+const age = 18
+const canVote = age >= 18 ? "Y" : "N"
+console.log(canVote) // "Y"
+```
+```swift
+let age = 18
+let canVote = age >= 18 ? "Y" : "N"
+print(canVote) // "Y"
+```
+
+## Loops
+
+### `for` Loop
+
+```js
+const alphabet = ["a", "b", "c"]
+for (const char of alphabet) {
+  console.log(char) // "a", "b", "c"
+}
+
+const range = (from, to, { inclusive = true } = {}) => 
+  Array(to - from + Number(inclusive)).fill(null).map((_, i) => i + from)
+// range(3, 5) = 3...5
+for (const num of range(3, 5)) {
+  if (num === 5) break
+  if (num % 2 === 1) continue
+  console.log(num) // 2, 4
+}
+// range(3, 5, { inclusive: false }) = 3..<5
+for (const num of range(3, 5, { inclusive: false })) {
+  console.log(num) // 3, 4
+}
+```
+```swift
+let alphabet = ["a", "b", "c"]
+for char in alphabet {
+  print(char) // "a", "b", "c"
+}
+
+for num in 1...10 {
+  if num == 5 {
+    break
+  }
+  if num % 2 == 1 {
+    continue
+  }
+  print(num) // 2, 4
+}
+for num in 3..<5 {
+  print(num) // 3, 4
+}
+```
+
+### `while` Loop
+
+```js
+let num = 0
+while (num !== 4) {
+  num = Math.ceil(Math.random() * 10)
+  console.log(num) // 1 to 10
+}
+```
+```swift
+var num = 0
+while num != 4 {
+  num = Int.random(in: 1...10)
+  print(num) // 1 to 10
+}
+```
