@@ -202,3 +202,83 @@ olympics[2021] = "Tokyo"
 print(olympics[2012, default: "World"]) // Optional("London")
 print(olympics.count) // 3
 ```
+
+## Sets
+
+```js
+const names = new Set(["Ali", "Veli", "Ahmet"])
+console.log(names) // Set { "Ali", "Veli", "Ahmet" }
+
+const cities = new Set()
+cities.add("İstanbul")
+cities.add("İstanbul")
+console.log(cities.has("İstanbul")) // true
+console.log(cities.size) // 1
+cities.add("Ankara")
+console.log(Array.from(cities).sort()) // ["Ankara", "İstanbul"]
+```
+```swift
+let names = Set(["Ali", "Veli", "Ahmet"])
+print(names) // ["Ali", "Veli", "Ahmet"]
+
+var cities = Set<String>()
+cities.insert("İstanbul")
+cities.insert("İstanbul")
+print(cities.contains("İstanbul")) // true
+print(cities.count) // 1
+cities.insert("Ankara")
+print(cities.sorted()) // ["Ankara", "İstanbul"]
+```
+
+## Enums
+
+```js
+const Weekday = Object.freeze({
+  monday: Symbol("monday"),
+  tuesday: Symbol("tuesday"),
+  wednesday: Symbol("wednesday"),
+  thursday: Symbol("thursday"),
+  friday: Symbol("friday"),
+})
+```
+```swift
+enum Weekday {
+  case monday
+  case tuesday
+  case wednesday
+  case thursday
+  case friday
+}
+var day = Weekday.monday
+day = Weekday.tuesday
+day = .wednesday
+
+enum Weekend {
+  case saturday, sunday
+}
+```
+
+## Type Annonations
+
+```ts
+const name: string = "Ali"
+const score: number = 0
+const pi: number = 3.141
+const isAdmin: boolean = true
+const albums: string[] = ["Century Child", "Human. :II: Nature."]
+const olympics: Map<number, string> = new Map([
+  [2012, "London"],
+  [2016, "Rio"],
+  [2021, "Tokyo"],
+])
+const books: Set<string> = new Set(["The Name of the Wind", "The Wise Man's Fear"])
+```
+```swift
+let name: String = "Ali"
+let score: Double = 0
+let pi: Double = 3.141
+let isAdmin: Bool = true
+let albums: [String] = ["Century Child", "Human. :II: Nature."]
+let olympics: [Int: String] = [2012: "London", 2016: "Rio", 2021: "Tokyo"]
+let books: Set<String> = Set(["The Name of the Wind", "The Wise Man's Fear"])
+```
