@@ -418,3 +418,96 @@ while num != 4 {
   print(num) // 1 to 10
 }
 ```
+
+## Functions
+
+```js
+const isEven = ({ num }) => {
+  const res = num % 2 === 0
+  return res
+}
+console.log(isEven({ num: 3 })) // false
+```
+```swift
+func isEven(num: Int) -> Bool {
+  let res = num % 2 == 0
+  return res
+}
+print(isEven(num: 3)) // false
+```
+
+### Return Multiple Values
+
+```js
+const getUserArray = () => ["Floor", "Jansen"]
+const userArray = getUserArray()
+console.log(`${userArray[0]} ${userArray[1]}`) // "Floor Jansen"
+
+const getUserDict = () => ({ name: "Floor", surname: "Jansen" })
+const userDict = getUserDict()
+console.log(`${userDict.name} ${userDict.surname}`) // "Floor Jansen"
+
+const getUserTuple = () => ["Floor", "Jansen"]
+const userTuple = getUserTuple()
+console.log(`${userArray[0]} ${userArray[1]}`) // "Floor Jansen"
+
+const getUserNamedTuple = () => ({ name: "Floor", surname: "Jansen" })
+const { name, surname } = getUserNamedTuple()
+console.log(`${name} ${surname}`) // "Floor Jansen"
+```
+```swift
+func getUserArray() -> [String] {
+  ["Floor", "Jansen"]
+}
+let userArray = getUserArray()
+print("\(userArray[0]) \(userArray[1])") // "Floor Jansen"
+
+func getUserDict() -> [String: String] {
+  ["name": "Floor", "surname": "Jansen"]
+}
+let userDict = getUserDict()
+print("\(userDict["name", default: "Ali"]) \(userDict["surname", default: "Veli"])") // "Floor Jansen
+
+func getUserTuple() -> (String, String) {
+  ("Floor", "Jansen")
+}
+let userTuple = getUserTuple()
+print("\(userTuple.0) \(userTuple.1)") // "Floor Jansen"
+
+func getUserNamedTuple() -> (name: String, surname: String) {
+  // ("Floor", "Jansen") // This is valid also
+  (name: "Floor", surname: "Jansen")
+}
+let (name, _) = getUserNamedTuple()
+let (_, surname) = getUserNamedTuple()
+print("\(name) \(surname)") // "Floor Jansen"
+```
+
+### Customize Parameter Labels
+
+```js
+const isOdd = (num) => {
+  return num % 2 === 1
+}
+console.log(isOdd(3)) // true
+
+const printTimesTable = ({ for: num }) => {
+  for (let i = 1; i <= 3; i++) {
+    console.log(`${i} x ${num} = ${i * num}`)
+  }
+}
+printTimesTable({ for: 5 }) // "1 x 5 = 5", "2 x 5 = 10", "3 x 5 = 15"
+```
+```swift
+func isOdd(_ num: Int) -> Bool {
+  num % 2 == 1
+}
+print(isOdd(3)) // true
+
+func printTimesTable(for num: Int) {
+  for i in 1...3 {
+    print("\(i) x \(num) = \(i * num)")
+  }
+}
+printTimesTable(for: 5) // "1 x 5 = 5", "2 x 5 = 10", "3 x 5 = 15"
+```
