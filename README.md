@@ -511,3 +511,87 @@ func printTimesTable(for num: Int) {
 }
 printTimesTable(for: 5) // "1 x 5 = 5", "2 x 5 = 10", "3 x 5 = 15"
 ```
+
+### Default Values for Parameters
+
+```js
+const printNumbers = ({ from, to = 10 }) => {
+  for (let i = from; i <= to; i++) console.log(i)
+}
+printNumbers({ from: 8 }) // 8, 9, 10
+```
+```swift
+func printNumbers(from: Int, to: Int = 10) {
+  for i in from...to {
+    print(i)
+  }
+}
+printNumbers(from: 8) // 8, 9, 10
+```
+
+### Handle Errors in Functions
+
+```js
+const PasswordError = Object.freeze({
+  short: Symbol("short"),
+  obvious: Symbol("obvious"),
+})
+
+const checkPassword = (password) => {
+  const length = password.length
+  if (length < 5) throw PasswordError.short
+  if (password === "12345") throw PasswordError.obvious
+
+  if (length < 8) return "Ok"
+  if (length < 10) return "Good"
+  return "Excellent"
+}
+
+try {
+  const res = checkPassword("12345")
+  console.log(res)
+} catch (err) {
+  if (err === PasswordError.short) {
+    console.log("Short password")
+  } else if (err === PasswordError.obvious) {
+    console.log("Try a stronger password.") // "Try a stronger password."
+  } else {
+    console.log("An error occured.")
+  }
+}
+```
+```swift
+enum PasswordError: Error {
+  case short, obvious
+}
+
+func checkPassword(_ password: String) throws -> String {
+  let count = password.count
+  if count < 5 {
+    throw PasswordError.short
+  }
+
+  if password == "12345" {
+    throw PasswordError.obvious
+  }
+
+  if count < 8 {
+    return "Ok"
+  } 
+  if count < 10 {
+    return "Good"
+  }
+  return "Excellent"
+}
+
+do {
+  let res = try checkPassword("12345")
+  print(res)
+} catch PasswordError.short {
+  print("Short password")
+} catch PasswordError.obvious {
+  print("Try a stronger password.") // "Try a stronger password."
+} catch {
+  print("An error occured")
+}
+```
