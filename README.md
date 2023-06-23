@@ -595,3 +595,153 @@ do {
   print("An error occured")
 }
 ```
+
+## Closures
+
+```js
+const sayHi = () => console.log("Hi!")
+sayHi() // "Hi"
+
+const greet = (name) => `Hi, ${name}!`
+console.log(greet("Ali")) // "Hi, Ali!"
+
+const sorted = [3, 1, 2].sort((a, b) => a - b)
+console.log(sorted) // [1, 2, 3]
+```
+```swift
+let sayHi = {
+  print("Hi!")
+}
+sayHi() // "Hi!"
+
+let greet = { (name: String) -> String in
+  "Hi, \(name)"
+}
+print(greet("Ali")) // "Hi, Ali!"
+
+let sorted = [3, 1, 2].sorted(by: { (a: Int, b: Int) -> Bool in
+  a < b
+})
+print(sorted) // [1, 2, 3]
+```
+
+### Trailing Closure
+
+```js
+const sorted = [3, 1, 2].sort((a, b) => a - b)
+console.log(sorted) // [1, 2, 3]
+
+const reversed = [3, 1, 2].sort((a, b) => b - a)
+console.log(reversed) // [3, 2, 1]
+```
+```swift
+let sorted = [3, 1, 2].sorted { a, b in 
+  a < b
+}
+print(sorted) // [1, 2, 3]
+
+let reversed = [3, 1, 2].sorted { $0 > $1 }
+print(reversed) // [3, 2, 1]
+```
+
+### Functions as Parameters
+
+```js
+const makeArray = ({ size, using: generator }) => {
+  const numbers = []
+  for (let i = 0; i < size; i++) {
+    numbers.push(generator())
+  }
+  return numbers;
+}
+```
+```swift
+func makeArray(size: Int, using generator: () -> Int) -> [Int] {
+  var numbers = [Int]()
+  for _ in 0..<size {
+    numbers.append(generator())
+  }
+  return numbers
+}
+```
+
+#### Example 1
+
+```js
+const arr = makeArray({ size: 3, using: () => Math.floor(Math.random() * 10) })
+console.log(arr) // [4, 2, 8]
+```
+```swift
+let arr = makeArray(size: 3) { Int.random(in: 1..<10) }
+print(arr) // [8, 6, 2]
+```
+
+#### Example 2
+
+```js
+const generateNumber = () => Math.floor(Math.random() * 10)
+const arr = makeArray({ size: 3, using: generateNumber })
+console.log(arr) // [5, 0, 4]
+```
+```swift
+func generateNumber() -> Int { Int.random(in: 0..<10 )}
+let arr = makeArray(size: 3, using: generateNumber)
+print(arr) // [7, 9, 3]
+```
+
+#### Example 3
+
+```js
+const printThreeSteps = ({ first, second, third }) => {
+  console.log("1st:")
+  first()
+  console.log("2nd:")
+  second()
+  console.log("3rd:")
+  third()
+  console.log("Completed")
+}
+printThreeSteps({
+  first: () => console.log("a"),
+  second: () => console.log("b"),
+  third: () => console.log("c"),
+}) // "1st:", "a", "2nd:", "b", "3rd:", "c", "Completed"
+```
+```swift
+func printThreeSteps(first: () -> Void, second: () -> Void, third: () -> Void) {
+  print("1st:")
+  first()
+  print("2nd:")
+  second()
+  print("3rd:")
+  third()
+  print("Completed")
+}
+printThreeSteps {
+  print("a")
+} second: {
+  print("b")
+} third: {
+  print("c")
+} // "1st:", "a", "2nd:", "b", "3rd:", "c", "Completed"
+```
+
+### How to Chain Functions
+
+```js
+const arr = [4, 3, 2, 5, 1]
+  .filter(x => x % 2 === 0)
+  .map(x => x * x)
+  .sort((x, y) => x - y)
+console.log(arr) // [4, 16]
+```
+```swift
+let arr = [4, 3, 2, 5, 1].filter { 
+  $0 % 2 == 0
+}.map {
+  $0 * $0
+}.sorted {
+  $0 < $1
+}
+print(arr) // [4, 16]
+```
